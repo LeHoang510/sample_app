@@ -1,9 +1,7 @@
 require "test_helper"
 
-class UserTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+class UserTest < ActionDispatch::IntegrationTest
+
   def setup
     @user = User.new(name: "Example User", email: "user@example.com", password: "foobar", password_confirmation: "foobar")
   end
