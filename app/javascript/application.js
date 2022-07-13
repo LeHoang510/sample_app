@@ -2,5 +2,13 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 
-require("jquery")
-import "bootstrap"
+//= require jquery
+//= require jquery-ui
+//= require bootstrap
+//= require bootstrap-sprockets
+//= require bootstrap.js
+//= require bootstrap.min.js
+//= require jquery-3.1.1.min.js
+//= require jquery_ujs
+//= require turbolinks
+//= require_tree .
