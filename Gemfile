@@ -60,6 +60,11 @@ gem 'faker'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate','1.0.0'
 
+gem "hotwire-rails", "~> 0.1.3"
+gem 'active_storage_validations'
+gem 'image_processing'
+gem 'mini_magick'
+# gem 'aws-sdk-s3', require: false
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
@@ -87,3 +92,4 @@ end
 group :production do
   gem 'pg', '1.1.4'
 end
+
