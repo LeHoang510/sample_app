@@ -18,9 +18,10 @@ Rails.application.routes.draw do
   # root "articles#index"
   root "static_pages#home"
   post '/login', to: 'sessions#create'
-  get '/logout', to: 'sessions#destroy'
+  delete '/logout', to: 'sessions#destroy'
   resources :users
   resources :password_resets, only: [:new, :create, :edit, :update]
   resources :account_activations, only: [:edit]
+  resources :microposts, only: [:create, :destroy]
 
 end
