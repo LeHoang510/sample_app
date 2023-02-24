@@ -231,6 +231,10 @@ input {
     img {
       display: block;
       padding: 5px 0;
+      float: left;
+    }
+    p.clear {
+      clear: left;
     }
   }
   .timestamp {
