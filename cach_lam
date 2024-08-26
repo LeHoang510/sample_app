@@ -1,0 +1,243 @@
+rails new de tao project #luu y de them bootstrap vao tu dau luon
+rails server // rails s 
+rails test // rails t
+rails console // rails c
+rails generate // rails g
+rails routes 
+
+bundle install --without production	#Lan sau chi can bundle install la du
+bundle update
+
+#link setup bootstrap
+https://jasonfleetwoodboldt.com/courses/stepping-up-rails/rails-7-bootstrap/
+
+
+set up git 
+	git remote add
+	git add .
+	git commit -m "..."
+	git push -u 
+	
+set up heroku
+	heroku create 
+	git push heroku master
+	
+moi lan lam 1 feature moi thi checkout sang mot branch khac
+lam signup thi them ssl vao
+==========================================================================================================================================================================================================
+
+rails generate controller StaticPages home help
+rails destroy controller StaticPages home help
+
+class << self // User.method la de tao ra method cua 1 class
+Verify pass protocol:
+	password se duoc luu duoi dang digest_pass chu khong phai bang gia tri chinh xac
+	digest_pass se duoc generate nho vao Bycrypt, cho du cung la 1 pass nhung cost khac nhau thi gia tri digest khac nhau (cost thay doi lien tuc)
+	khi dang nhap thi Bycrypt lay cost cua digest_pass de tao ra digest_pass tu pass moi nhap vao roi moi so sanh 
+
+Neu minh co duoc digest password thi minh co the hack dc khong?// minh co ham thi minh phan tich ra thanh password roi dang nhap vao?
+BCrypt::Password.new(remember_digest).is_password?(remember_token) 	#Day la ham reverse???
+=======================================================================================================================================================================================================
+routes 
+	get 'password_resets/edit'	#password_resets_edit_path//url
+	get '/help', to: 'static_pages#help'
+	
+	root 'static_pages#home'
+	
+	resources :users
+	resources :microposts, only: [:create, :destroy]
+	resources :users do
+		member do
+			get :following, :followers
+		end
+	end
+
+# RES cua resources
+	get	index	show all
+	get	show 	show 1 ele
+	get	new 	new ele
+	post	create	create new ele
+	get 	edit	edit ele
+	patch	update	update ele
+	delete	destroy delete ele	
+
+#
+root_path -> '/'
+root_url -> 'http://www.example.com/'
+
+<%= link_to "Contact", contact_path %>	# tao duong link
+  //button_to
+   
+# routes goi cac ham trong controller, cac ham se render trang theo ten tuong ung voi ham # C->V
+
+
+
+
+
+helpers
+
+# thuong duoc su dung cho view hoac cho controller(rat it, neu co thi de quan li ghi nho cac gia tri tam thoi vi du nhu session)
+# day la cac module ho tro cho cac view tuong ung
+	
+	SesssionHelper		# module dac biet cho controller va view de quan li viec dang nhap va dang xuat	
+		gom co cac chuc nang
+			dang nhap(session[:user_id])
+			nguoi dung hien tai(current_user)
+			da dang nhap hay chua(?)
+			dang xuat(session.delete(:user_id) va set current_user)
+			# Quyet dinh co remember hay khong la o controlle, helper giup luu token va gui lenh den model
+
+
+
+
+views
+	layouts/application.html.erb 	# Day la layout cua web 
+					# O trong phan nay can co <%= yield %> la noi render cac view khac
+		_header.html.erb	# Day la phan chua navbar
+		_rails_default.html.erb# Day la phan chua cac link js css 
+		_footer.html.erb	# Day la phan chua footer
+		
+	shared/_error_messages.html.erb
+		
+# cac ham views co the su dung
+<% provide(:title, "Help") %>
+<%= yield(:title) %>
+<%= debug(params) if Rails.env.development? %> 
+<%= form_for(@user) do |f| %>				# trong truong hop user la 1 model thi no da duoc xac dinh san methode post params[:user] 
+<%= form_for(:session, url: login_path) do |f| %>	# trong truong hop session thi phai them link cua post, va para nhan vao la params[:session] 
+<%= pluralize(@user.errors.count, "error") %>
+
+
+models
+	# tao model voi cac para co ban sau do them cac index tuy chon vao, them cac dieu kien cho model nhu validates hoac before_save
+	# them ..._digest la de xac thuc(su dung add_..._to_... )
+	# tao digest tu string bang ham su dung bycrypt vi moi gia tri se co 1 digest cua no de xac minh
+	# ham authenticate se xac minh password(nhung lam sao no biet se su dung bycrypt va so sanh voi password_digest, va lam sao no biet duoc la se luu password vao trong password_digest)?
+	# su dung cookies id la de neu no co ton tai thi kiem tra token
+	# su dung token de lien ket voi tai khoan vi du nhu remember hay activate => se co attribute ..._token de tao ra digest (1) va luu lai gia tri de send to cookies hoac email (2)
+	
+	rails generate model User name:string email:string
+	rails db:migrate
+	rails db:rollback
+	new xong roi save ~ create =/ destroy	# chua save ma reload thi auto mat
+	find() # auto id
+	find_by({type: email}: {value:"nhl@gmail.com})
+	validates :name, presence: true, length: { maximum: 50 }, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
+	rails generate migration add_index_to_users_email
+	has_secure_password se tu dong generate ra 2 para la password va password_confirmation 
+	
+	update_attribute({name},{value})	# de cap nhat gia tri
+	cookies.permanent.signed[:user_id] 	# de encrypt user_id
+	cookies.signed[:user_id]		# de decrypt
+	
+	update_attribute se cap nhat updated_at con set value thi khong
+	
+	
+	
+controller
+	# su dung de lay va truyen para cho view 
+	# ApplicationController la class cha cua tat ca cac controller vi vay neu can su dung module gi tu cac helper thi include vao
+	show	# doi luc can lay para truyen vao
+	new	# trong th dung form for thi cu tao 1 user moi de no lay para cho create
+	create	# lay para de tao ele. luu y cach tao moi 1 ele cua model. check save
+	
+	# khoi tao ele
+	khi lay params thi chi cho phep nguoi dung gui nhung thu duoc cho phep va de ham nay trong private de tranh truong hop bi hack
+	params.require(:user).permit(:name) # lay params[:user][:name]
+	
+	# verify info
+	xem ele co ton tai hay khong va dung authenticate
+	
+	
+	redirect_to {url}
+	flash[:success] =	# tao flash
+	
+
+	
+# console
+s.class.superclass
+
+
+==========================================================================================================================================================================================================
+
+* Test Controller: 
+	Check xem trang goi duoc hay khong
+
+* Test Integration:
+	rails generate integration_test {name}
+	Ktra template
+	Ktra link
+	Ktra hanh dong co thay doi gi khong
+
+* Test Model:
+	test valid
+	test cac truong hop khong hop le
+
+* Test:
+	def setup			# De setup cac gia tri truoc khi ktra
+	end
+	
+	get {link: root_path} 					# De chuyen trang sang url bang method get 
+	post {link: root_path} , params: {}			# De chuyen trang sang url bang method post
+	assert_reponse :success 				# De ktra trang dc goi thanh cong hay chua
+	assert_select {tag: "title"},{content: " "}		# De ktra xem tag duoc chon co chua noi dung do hay khong
+			"a[href=?]", about_path
+	assert_template {temp: 'static_pages/home'}		# De ktra xem co dung template hay khong
+	assert 						# check true or false
+	assert_no_difference 'User.count' do			# de kiem tra k co su khac nhau truoc va sau do
+	follow_redirect!					# theo chuyen huong
+	assert_redirected_to @user				# check xem co chuyen huong khong
+	
+* test_helper:	# de tao cac ham co the su dung cho test cung nhu include fixtures va cac thu khac
+			
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	

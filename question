@@ -1,0 +1,116 @@
+# Allow connections to local server.
+  config.hosts.clear
+ 
+anh khong load dc?
+
+cai tren co hay khong thi minh van vao dc local server ma?
+
+dung rails 7. co dc k?
+ruby 3.1
+
+heroku 
+
+em gap van de voi viec tao file truoc roi up len git??? van de hien tai la o phan git pull ve?? do khong tim thay o/master??
+
+group :development, :test do lam gi 
+
+byebug va debug
+
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+them file nhu the nao?
+
+bundle install --without production 
+# vi sao phai update??
+
+ham full_title khong hoat dong trong test layout import kieu gi
+
+rails test khong hoat dong trong khi test model hoat dong bth
+
+yaml?
+
+vi sao phai migrate moi lan tao database?
+heroku vs production mode?
+
+helper cho nhung cai nao dung? view va controller?
+
+size cua userhelper???
+
+vi sao foobar lai k nen dung?
+
+khi nao thi minh viet kieu _error_message
+
+skip_before_action :verify_authenticity_token usercontroller
+
+test cai gi day?
+assert_select 'div#<CSS id for error explanation>'
+assert_select 'div.<CSS class for field with error>'
+
+lam sao biet ham create se duoc chay?
+
+loi khi add ssl? push len heroku thi oke nhung ma dung production thi k
+
+user controller, create tu duoc truy cap khi summit?
+vi sao o new phai tao ra 1 user trong khi kieu gi o create cung tao lai?
+
+params hoi mo ho? luc nao cx la params
+
+helper? dung dc o MVC hay chi V?
+dau gach chan o dau? vi du _header
+
+yarn la gi
+
+Changing the layout links
+bootstrap k chay? app/javascript/packs/application.js
+
+has secure password tu generate ra password voi passwordconfirmation?
+
+redirect to root_url khong hoat dong, phai them status 303 vao hoi cuc
+redirect @user khong hoat dong?? trong phan signup, test van ok, terminal hien thong tin chuyen nhung khong chuyen trang fuck
+
+quen git push cac branch khac, neu push roi thi sau do pull ve roi merge hay merge trong may luon?
+
+moi lan push heroku thi du lieu co luu k?
+
+vi du sua 1 chuc nang, thi sua tren branch day sau day merge dc ?
+
+production thi k chay dc nhung heroku thi work bth
+
+giai thich ve cai token cua cookies
+
+authenticate va dau bang? stupid ques
+
+add index va add cai khac(add column)
+
+user.digest cua model de test
+
+assert select div.navigation khong hoat dong
+
+yarn de add javascript, rvm? va npm? gem?
+
+code add vao trong users.yml khong hoat dong? sai syntax?
+
+css cua all users khong hoat dong
+
+text vs html cua email?
+
+vi sao phai dung add_index ma k dung add index to microposts?
+
+feed cua model/micropost hoat dong kieu gi? vi dua id vao dau?
+
+render trong index html va render trong feed se render ra _user va _micropost autmatique?
+
+vi sao phai them vao 
+      @feed_items = current_user.feed.paginate(page: params[:page]) trong micropost controller
+
+  <%= will_paginate @feed_items, params: { controller: :static_pages, action: :home } %> %> trong feed html
+
+Ajax, respond to in relationship controller
+
+
+
+
+
+
+
